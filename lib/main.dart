@@ -51,7 +51,7 @@ class _SampDesignState extends State<SampDesign> {
                 children: [
                   SizedBox(height: 20),
                   Text(
-                    "Explore the world! By \n Travelling",
+                    "Explore the world! By \nTravelling",
                     style: TextStyle(
                         fontSize: 24,
                         color: Colors.black,
