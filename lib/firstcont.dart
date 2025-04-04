@@ -1,66 +1,75 @@
 import 'package:flutter/material.dart';
 
 class FirstCont extends StatelessWidget {
-  var name;
-  dynamic image;
+  final String name;
+  final String image;
 
-  FirstCont({this.name, this.image, super.key});
+  FirstCont({required this.name, required this.image, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: <Widget>[
-            Container(
-              width: 100,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                children: [
-                  ClipRRect(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double cardWidth = screenWidth * 0.28;
+    final double cardHeight = cardWidth * 1.4;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: cardWidth,
+            height: cardHeight,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.network(
+                    image,
+                    width: cardWidth,
+                    height: cardHeight,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Container(
+                  width: cardWidth,
+                  height: cardHeight,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      image,
-                      width: 100,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    ),
+                    color: Colors.black.withOpacity(0.3),
                   ),
-                  Container(
-                    width: 100,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.black.withOpacity(
-                          0.3), // Dark overlay for better text visibility
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 10,
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Text(
-                        name,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                ),
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-          ],
-        ),
-        SizedBox(width: 10),
-      ],
+          ),
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 }
